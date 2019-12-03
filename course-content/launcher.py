@@ -45,6 +45,13 @@ train = train.join(target_encoder.transform(train[categorical_features]).add_suf
 valid = valid.join(target_encoder.transform(valid[categorical_features]).add_suffix('_target'))
 test = test.join(target_encoder.transform(test[categorical_features]).add_suffix('_target'))
 
+#Adding columns with CatBoost encoding
+catboost_encoder = ce.CatBoostEncoder(cols=categorical_features)
+catboost_encoder.fit(train[categorical_features], train['is_attributed'])
+
+train = train.join(catboost_encoder.transform(train[categorical_features]).add_suffix('_catboost'))
+valid = valid.join(catboost_encoder.transform(valid[categorical_features]).add_suffix('_catboost'))
+test = test.join(catboost_encoder.transform(test[categorical_features]).add_suffix('_catboost'))
 
 print("BASELINE MODEL:")
 feature_cols = ['day', 'hour', 'minute', 'second', 'ip', 'app', 'device', 'os',
@@ -64,4 +71,9 @@ train_model(train, valid, test, feature_cols, early_stopping_rounds=30)
 print("TARGET ENCODING:")
 feature_cols = ['day', 'hour', 'minute', 'second', 'ip_target', 'app_target', 'device_target', 'os_target',
                 'channel_target']
+train_model(train, valid, test, feature_cols, early_stopping_rounds=30)
+
+print("CATBOOST ENCODING:")
+feature_cols = ['day', 'hour', 'minute', 'second', 'ip_catboost', 'app_catboost', 'device_catboost', 'os_catboost',
+                'channel_catboost']
 train_model(train, valid, test, feature_cols, early_stopping_rounds=30)
