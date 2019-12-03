@@ -46,6 +46,11 @@ valid = valid.join(target_encoder.transform(valid[categorical_features]).add_suf
 test = test.join(target_encoder.transform(test[categorical_features]).add_suffix('_target'))
 
 
+print("BASELINE MODEL:")
+feature_cols = ['day', 'hour', 'minute', 'second', 'ip', 'app', 'device', 'os',
+                'channel']
+train_model(train, valid, test, feature_cols, early_stopping_rounds=30)
+
 print("LABEL ENCODING:")
 feature_cols = ['day', 'hour', 'minute', 'second', 'ip_labels', 'app_labels', 'device_labels', 'os_labels',
                 'channel_labels']

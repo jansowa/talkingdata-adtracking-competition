@@ -1,0 +1,18 @@
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'ip_count', 'app_count', 'device_count', 'os_count', 'channel_count']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9934315789473683
+Test score: 0.9880410821643286
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'ip_target', 'app_target', 'device_target', 'os_target', 'channel_target']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9210586466165415
+Test score: 0.9935420841683367
