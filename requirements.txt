@@ -1,0 +1,4 @@
+category-encoders==2.1.0
+lightgbm==2.3.1
+pandas==0.25.3
+scikit-learn==0.21.3
