@@ -32,6 +32,7 @@ def train_model(train, valid, test=None, feature_cols=None, early_stopping_round
     if test is not None:
         test_pred = bst.predict(test[feature_cols])
         test_score = metrics.roc_auc_score(test['is_attributed'], test_pred)
+        print(f"Test score: {test_score}")
         return bst, valid_score, test_score
     else:
         return bst, valid_score
