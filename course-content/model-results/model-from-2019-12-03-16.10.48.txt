@@ -1,0 +1,9 @@
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'ip', 'app_catboost', 'device_catboost', 'os_catboost', 'channel_catboost']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9680842105263157
+Test score: 0.884924849699399

@@ -1,0 +1,36 @@
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'app_labels', 'device_labels', 'os_labels', 'channel_labels']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9363989974937343
+Test score: 0.8710470941883767
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'app_count', 'device_count', 'os_count', 'channel_count']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9531869674185464
+Test score: 0.8541733466933868
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'app_target', 'device_target', 'os_target', 'channel_target']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9684571428571428
+Test score: 0.8878932865731461
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'app_catboost', 'device_catboost', 'os_catboost', 'channel_catboost']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9711498746867169
+Test score: 0.9239704408817635

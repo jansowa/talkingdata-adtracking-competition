@@ -1,0 +1,9 @@
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'ip', 'app', 'device', 'os', 'channel', 'ip_app', 'ip_device', 'ip_os', 'ip_channel', 'app_device', 'app_os', 'app_channel', 'device_os', 'device_channel', 'os_channel']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9894235588972432
+Test score: 0.9851027054108216

@@ -1,13 +1,14 @@
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import category_encoders as ce
+from itertools import combinations
 from processing_utils import get_data_splits
 from processing_utils import train_model
 
 train_sample_path = '../competition-data/train_sample.csv'
 train_sample_data = pd.read_csv(train_sample_path, parse_dates=['click_time'])
 
-print(train_sample_data.head())
+# print(train_sample_data.head())
 
 clicks = train_sample_data.copy()
 clicks['day'] = clicks['click_time'].dt.day.astype('uint8')
@@ -21,6 +22,19 @@ categorical_features = ['ip', 'app', 'device', 'os', 'channel']
 label_encoder = LabelEncoder()
 for feature in categorical_features:
     clicks[feature + "_labels"] = label_encoder.fit_transform(clicks[feature])
+
+interactions = pd.DataFrame(index=clicks.index)
+for first_cat, second_cat in combinations(categorical_features, 2):
+    new_column = clicks[first_cat].astype(str) + "_" + clicks[second_cat].astype(str)
+    new_column = new_column.rename(first_cat+"_"+second_cat)
+    interactions = interactions.join(new_column)
+
+interactions_columns = []
+for column in interactions.columns:
+    interactions[column] = label_encoder.fit_transform(interactions[column])
+    interactions_columns.append(column)
+
+clicks = clicks.join(interactions)
 
 clicks_sorted = clicks.sort_values('click_time')
 

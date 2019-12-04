@@ -1,0 +1,18 @@
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'ip_labels', 'app_labels', 'device_labels', 'os_labels', 'channel_labels', 'ip_app', 'ip_device', 'ip_os', 'ip_channel', 'app_device', 'app_os', 'app_channel', 'device_os', 'device_channel', 'os_channel']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9894235588972432
+Test score: 0.9851027054108216
+Feature columns: 
+['day', 'hour', 'minute', 'second', 'ip_count', 'app_count', 'device_count', 'os_count', 'channel_count', 'ip_app', 'ip_device', 'ip_os', 'ip_channel', 'app_device', 'app_os', 'app_channel', 'device_os', 'device_channel', 'os_channel']
+LightGBM params:
+{'num_leaves': 64, 'objective': 'binary', 'metric': 'auc', 'seed': 7, 'boost_from_average': False}
+num_round: 1000
+verbose_eval: False
+early_stopping_rounds: 30
+Validation AUC score: 0.9920721804511277
+Test score: 0.9430460921843689
