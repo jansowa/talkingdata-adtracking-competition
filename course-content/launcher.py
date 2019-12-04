@@ -66,6 +66,27 @@ train = train.join(catboost_encoder.transform(train[categorical_features]).add_s
 valid = valid.join(catboost_encoder.transform(valid[categorical_features]).add_suffix('_catboost'))
 test = test.join(catboost_encoder.transform(test[categorical_features]).add_suffix('_catboost'))
 
+#Adding column with clicks in last 6 hours
+train = train.sort_values('click_time')
+valid = valid.sort_values('click_time')
+test = test.sort_values('click_time')
+
+train_time_sorted = pd.Series(train.index, index=train.click_time, name="count_6_hours").sort_index()
+valid_time_sorted = pd.Series(valid.index, index=valid.click_time, name="count_6_hours").sort_index()
+test_time_sorted = pd.Series(test.index, index=test.click_time, name="count_6_hours").sort_index()
+
+train_count_6_hours = train_time_sorted.rolling('6h').count()-1
+valid_count_6_hours = valid_time_sorted.rolling('6h').count()-1
+test_count_6_hours = test_time_sorted.rolling('6h').count()-1
+
+train_count_6_hours.index = train.index
+valid_count_6_hours.index = valid.index
+test_count_6_hours.index = test.index
+
+train['ip_past_6hr_counts'] = train_count_6_hours
+valid['ip_past_6hr_counts'] = valid_count_6_hours
+test['ip_past_6hr_counts'] = test_count_6_hours
+
 print("BASELINE MODEL:")
 feature_cols = ['day', 'hour', 'minute', 'second', 'ip', 'app', 'device', 'os',
                 'channel']
@@ -78,7 +99,7 @@ train_model(train, valid, test, feature_cols, early_stopping_rounds=30)
 
 print("COUNT ENCODING:")
 feature_cols = ['day', 'hour', 'minute', 'second', 'ip_count', 'app_count', 'device_count', 'os_count',
-                'channel_count']
+                'channel_count', 'ip_past_6hr_counts']
 train_model(train, valid, test, feature_cols, early_stopping_rounds=30)
 
 print("TARGET ENCODING:")
