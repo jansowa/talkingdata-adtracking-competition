@@ -4,11 +4,11 @@ from logging_utils import log_model_results
 
 
 def get_data_splits(dataframe, valid_fraction=0.1):
-    dataframe = dataframe.sort_values('click_time')
+    # dataframe = dataframe.sort_values('click_time')
     valid_rows = int(len(dataframe) * valid_fraction)
-    train = dataframe[:-valid_rows * 2]
-    valid = dataframe[-valid_rows * 2:-valid_rows]
-    test = dataframe[-valid_rows:]
+    train = dataframe[:-valid_rows * 2].sort_values('click_time')
+    valid = dataframe[-valid_rows * 2:-valid_rows].sort_values('click_time')
+    test = dataframe[-valid_rows:].sort_values('click_time')
 
     return train, valid, test
 

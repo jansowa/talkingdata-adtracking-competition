@@ -10,6 +10,7 @@ train_sample_data = pd.read_csv(train_sample_path, parse_dates=['click_time'])
 
 # print(train_sample_data.head())
 
+#Add columns with day, hour, minute, second
 clicks = train_sample_data.copy()
 clicks['day'] = clicks['click_time'].dt.day.astype('uint8')
 clicks['hour'] = clicks['click_time'].dt.hour.astype('uint8')
@@ -36,9 +37,7 @@ for column in interactions.columns:
 
 clicks = clicks.join(interactions)
 
-clicks_sorted = clicks.sort_values('click_time')
-
-train, valid, test = get_data_splits(clicks_sorted, valid_fraction=0.1)
+train, valid, test = get_data_splits(clicks, valid_fraction=0.1)
 
 for each in [train, valid, test]:
     print(f"Outcome fraction = {each.is_attributed.mean():.6f}")
